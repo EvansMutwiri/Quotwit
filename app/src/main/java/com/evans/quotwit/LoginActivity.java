@@ -52,12 +52,12 @@ public class LoginActivity extends AppCompatActivity {
             String username = mUsername.getText().toString();
             String password = mPassword.getText().toString();
 
-            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
-
             Intent topics = new Intent(LoginActivity.this, Topics.class);
             topics.putExtra("username", username);
 
             startActivity(topics);
+
+            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
 
         }
     }

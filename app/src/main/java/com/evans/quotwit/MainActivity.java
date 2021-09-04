@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "skip", Toast.LENGTH_SHORT).show();
+                Intent topics = new Intent(MainActivity.this, Topics.class);
+                startActivity(topics);
             }
         });
     }
