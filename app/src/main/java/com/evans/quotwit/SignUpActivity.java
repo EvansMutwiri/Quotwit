@@ -72,7 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             //send data to server
 
-            String userName = mUsername.getText().toString();
+            String username = mUsername.getText().toString();
             String email = mEmail.getText().toString();
             String password = mPassword.getText().toString();
             String repeatPassword = mRepeatPassword.getText().toString();
@@ -81,9 +81,10 @@ public class SignUpActivity extends AppCompatActivity {
 
             //call API BUT meanwhile ill add intent to login
             Intent login = new Intent(SignUpActivity.this, LoginActivity.class);
-            startActivity(login);
-            login.putExtra("Username", userName);
+            login.putExtra("username", username);
             login.putExtra("password", password);
+            startActivity(login);
+
         }
 
     }

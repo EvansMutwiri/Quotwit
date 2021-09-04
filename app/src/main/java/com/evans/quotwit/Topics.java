@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class Topics extends AppCompatActivity {
     private TextView mWelcomeText;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
