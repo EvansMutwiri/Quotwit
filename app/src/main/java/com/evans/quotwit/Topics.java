@@ -11,6 +11,15 @@ public class Topics extends AppCompatActivity {
     private TextView mWelcomeText;
     private ListView mListView;
 
+    //topics list
+    private String[] topics = new String[] {
+            "Radio", "Movies",
+            "Soccer", "Consumer products", "Poetry", "Books and Literature",
+            "Music", "Lyrics", "Programming", "Geek jokes",
+            "News", "Astronomy", "Politics",
+            "Cars", "Technology"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
