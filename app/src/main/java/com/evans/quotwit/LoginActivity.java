@@ -18,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
+
         viewInitializations();
     }
 
@@ -49,10 +49,15 @@ public class LoginActivity extends AppCompatActivity {
 
             // Input is valid, here send data to your server
 
-            String email = mUsername.getText().toString();
+            String username = mUsername.getText().toString();
             String password = mPassword.getText().toString();
 
             Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
+
+            Intent topics = new Intent(LoginActivity.this, Topics.class);
+            topics.putExtra("username", username);
+
+            startActivity(topics);
 
         }
     }
