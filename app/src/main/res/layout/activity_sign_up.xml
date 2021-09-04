@@ -140,7 +140,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/layout_repeat_password"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@string/sign_up"
+                android:text="@string/perf_signup"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:background="@color/btnstroke"
@@ -149,7 +149,7 @@
                 app:layout_constraintWidth_percent="0.7"
                 style="?android:attr/borderlessButtonStyle"
                 android:elevation="2dp"
-                android:onClick="performSignUp"
+                android:onClick="SubmitSignUp"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
