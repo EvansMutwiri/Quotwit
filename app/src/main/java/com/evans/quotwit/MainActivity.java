@@ -22,19 +22,19 @@ public class MainActivity extends AppCompatActivity {
         mSignupbtn = findViewById(R.id.signupbtn);
         mTextView2 = findViewById(R.id.textView2);
 
-        mLoginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "log in", Toast.LENGTH_LONG).show();
-            }
-        });
-
         mSignupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "new user", Toast.LENGTH_LONG).show();
                 Intent signup = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(signup);
+            }
+        });
+
+        mLoginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "log in", Toast.LENGTH_LONG).show();
             }
         });
 

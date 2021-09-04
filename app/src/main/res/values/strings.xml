@@ -6,4 +6,8 @@
     <string name="log_in">Log in</string>
     <string name="sign_up">Sign up</string>
     <string name="subheading">We help people easily find information on the topics they’re passionate about.</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
 </resources>
