@@ -101,7 +101,7 @@
                     android:hint="@string/password"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:textColor="#000000"
+                    android:textColor="#000"
                     android:textSize="15sp"
                     android:inputType="textPassword"
                     />
@@ -129,7 +129,7 @@
                     android:textColor="#000000"
                     android:textSize="15sp"
                     android:inputType="textPassword"
-                    />
+                    android:importantForAutofill="no" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -149,7 +149,7 @@
                 app:layout_constraintWidth_percent="0.7"
                 style="?android:attr/borderlessButtonStyle"
                 android:elevation="2dp"
-                android:onClick="SubmitSignUp"
+                android:onClick="submitSignup"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
