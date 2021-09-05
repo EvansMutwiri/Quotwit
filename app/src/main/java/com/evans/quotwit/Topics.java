@@ -9,11 +9,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class Topics extends AppCompatActivity {
-    private TextView mWelcomeText;
-    private ListView mListView;
 
     //topics list
-    private String[] topics = new String[] {
+    private final String[] topics = new String[] {
             "Radio", "Movies",
             "Soccer", "Consumer products", "Poetry", "Books and Literature",
             "Music", "Lyrics", "Programming", "Geek jokes",
@@ -26,8 +24,8 @@ public class Topics extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topics);
 
-        mListView = findViewById(R.id.topics_listView);
-        mWelcomeText = findViewById(R.id.welcomeTextView);
+        ListView mListView = findViewById(R.id.topics_listView);
+        TextView mWelcomeText = findViewById(R.id.welcomeTextView);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, topics);
         mListView.setAdapter(adapter);
@@ -35,7 +33,7 @@ public class Topics extends AppCompatActivity {
         Intent topics = getIntent();
         String username = topics.getStringExtra("username");
 
-        mWelcomeText.setText("Hello there " + username);
+        mWelcomeText.setText(String.format("Hello there %s", username));
 
     }
 }

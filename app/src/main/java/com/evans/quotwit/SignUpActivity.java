@@ -5,17 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.Objects;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SignUpActivity extends AppCompatActivity {
 
-    EditText mUsername;
-    EditText mEmail;
-    EditText mPassword;
-    EditText mRepeatPassword;
+    @BindView(R.id.et_user_name) EditText mUsername;
+    @BindView(R.id.et_email) EditText mEmail;
+    @BindView(R.id.et_password) EditText mPassword;
+    @BindView(R.id.et_repeat_password)EditText mRepeatPassword;
 
     final int MIN_PASSWORD_LENGTH = 6;
 
@@ -25,15 +29,12 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
+        ButterKnife.bind(this);
         viewInitializations();
     }
 
     void viewInitializations(){
-        mUsername = findViewById(R.id.et_user_name);
-        mEmail = findViewById(R.id.et_email);
-        mPassword = findViewById(R.id.et_password);
-        mRepeatPassword = findViewById(R.id.et_repeat_password);
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
