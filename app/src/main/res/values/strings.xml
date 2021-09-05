@@ -12,4 +12,5 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="perf_signup">Sign up</string>
     <string name="create_an_account">Create an Account</string>
+    <string name="boldfont">\@font/Jost-Bold.tff</string>
 </resources>
