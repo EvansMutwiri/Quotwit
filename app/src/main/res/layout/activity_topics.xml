@@ -15,28 +15,19 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/jost_medium"
-        android:text="Hello "
+        android:text="@string/hello"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvContacts"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
     <ListView
         android:id="@+id/topics_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/welcomeTextView"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_marginTop="52dp"
         android:fontFamily="@font/jost_medium"
         android:textColor="#000"
