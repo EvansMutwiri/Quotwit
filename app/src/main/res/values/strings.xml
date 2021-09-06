@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Quotwit</string>
+    <string name="qtwit">Qtwit</string>
+    <string name="logo">Logo</string>
+    <string name="skip">Skip</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="subheading">We help people easily find information on the topics they’re passionate about.</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="perf_signup">Sign up</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="boldfont">\@font/Jost-Bold.tff</string>
+    <string name="hello">Hello</string>
 </resources>
