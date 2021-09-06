@@ -5,46 +5,53 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-    private Button mTextView2;
-    private Button mLoginbtn;
-    private Button mSignupbtn;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    @BindView(R.id.textView)
+    Button mTextView;
+    @BindView(R.id.loginbtn)
+    Button mLoginbtn;
+    @BindView(R.id.signupbtn)
+    Button mSignupbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mLoginbtn = findViewById(R.id.loginbtn);
-        mSignupbtn = findViewById(R.id.signupbtn);
-        mTextView2 = findViewById(R.id.textView2);
+        ButterKnife.bind(this);
 
-        mSignupbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "new user", Toast.LENGTH_LONG).show();
-                Intent signup = new Intent(MainActivity.this, SignUpActivity.class);
-                startActivity(signup);
-            }
-        });
+        mSignupbtn.setOnClickListener(this);
+        mLoginbtn.setOnClickListener(this);
+        mTextView.setOnClickListener(this);
+    }
 
-        mLoginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "log in", Toast.LENGTH_LONG).show();
-                Intent login = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(login);
-            }
-        });
+    @Override
+    public void onClick(View view) {
+        if (view == mSignupbtn) {
+            Toast.makeText(MainActivity.this, "new user", Toast.LENGTH_LONG).show();
+            Intent signup = new Intent(MainActivity.this, SignUpActivity.class);
+            startActivity(signup);
+        }
 
-        mTextView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "skip", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (view == mLoginbtn) {
+            Toast.makeText(MainActivity.this, "log in", Toast.LENGTH_LONG).show();
+            Intent login = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(login);
+        }
+
+        if (view == mTextView) {
+            Toast.makeText(MainActivity.this, "skip", Toast.LENGTH_SHORT).show();
+            Intent topics = new Intent(MainActivity.this, Topics.class);
+            startActivity(topics);
+        }
     }
 }

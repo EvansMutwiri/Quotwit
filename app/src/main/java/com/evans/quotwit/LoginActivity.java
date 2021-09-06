@@ -18,13 +18,18 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         viewInitializations();
     }
 
     void viewInitializations(){
-        mUsername= findViewById(R.id.et_username);
-        mPassword= findViewById(R.id.et_password);
+        mUsername= findViewById(R.id.username);
+
+        //set text from login intent
+        Intent login = getIntent();
+        String username = login.getStringExtra("username");
+        mUsername.setText(username);
+
+        mPassword= findViewById(R.id.password);
     }
 
     boolean validateInput() {
@@ -52,12 +57,12 @@ public class LoginActivity extends AppCompatActivity {
             String username = mUsername.getText().toString();
             String password = mPassword.getText().toString();
 
-            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
-
             Intent topics = new Intent(LoginActivity.this, Topics.class);
             topics.putExtra("username", username);
 
             startActivity(topics);
+
+            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
 
         }
     }
