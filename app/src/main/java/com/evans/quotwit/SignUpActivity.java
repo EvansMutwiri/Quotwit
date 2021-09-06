@@ -59,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
             mPassword.setError("Password length must be min " + MIN_PASSWORD_LENGTH);
             return false;
         }
-        if (!mPassword.getText().toString().equals(mRepeatPassword.getText().toString().toString())) {
+        if (!mPassword.getText().toString().equals(mRepeatPassword.getText().toString())) {
             mRepeatPassword.setError("Password does not match");
             return false;
         }
@@ -82,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
             //call API BUT meanwhile ill add intent to login
             Intent login = new Intent(SignUpActivity.this, LoginActivity.class);
             startActivity(login);
-            login.putExtra("username", userName);
+            login.putExtra("Username", userName);
             login.putExtra("password", password);
         }
 
