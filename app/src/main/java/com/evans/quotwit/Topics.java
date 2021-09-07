@@ -24,16 +24,16 @@ public class Topics extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topics);
 
-        ListView mListView = findViewById(R.id.topics_listView);
-        TextView mWelcomeText = findViewById(R.id.welcomeTextView);
+//        ListView mListView = findViewById(R.id.topics_listView);
+//        TextView mWelcomeText = findViewById(R.id.welcomeTextView);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, topics);
-        mListView.setAdapter(adapter);
-
-        Intent topics = getIntent();
-        String username = topics.getStringExtra("username");
-
-        mWelcomeText.setText(String.format("Hello there %s", username));
+//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, topics);
+//        mListView.setAdapter(adapter);
+//
+//        Intent topics = getIntent();
+//        String username = topics.getStringExtra("username");
+//
+//        mWelcomeText.setText(String.format("Hello there %s", username));
 
     }
 }

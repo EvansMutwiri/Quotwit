@@ -7,33 +7,36 @@
     android:visibility="visible"
     tools:context=".Topics">
 
-    <TextView
-        android:id="@+id/welcomeTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/jost_medium"
-        android:text="@string/hello"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/topics_listView"
+    <com.google.android.material.tabs.TabLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/welcomeTextView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="52dp"
-        android:fontFamily="@font/jost_medium"
-        android:textColor="#000"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView"
-        tools:layout_editor_absoluteX="0dp" />
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabMode="scrollable">
 
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entertainment"
+            android:textAllCaps="false" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tech" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Life" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Health" />
+    </com.google.android.material.tabs.TabLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
