@@ -56,6 +56,7 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
                 android:textColorHint="#808080"
+                app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -79,6 +80,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_password"
+                app:hintEnabled="false"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
