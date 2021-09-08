@@ -1,14 +1,22 @@
 package com.evans.quotwit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
+
 public class Topics extends AppCompatActivity {
+
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     //topics list
     private final String[] topics = new String[] {
@@ -34,6 +42,18 @@ public class Topics extends AppCompatActivity {
 //        String username = topics.getStringExtra("username");
 //
 //        mWelcomeText.setText(String.format("Hello there %s", username));
+
+        tabLayout = findViewById(R.id.tablayout);
+        viewPager = findViewById(R.id.viewpager);
+
+        tabLayout.setupWithViewPager(viewPager);
+
+        VPAdaptor vpAdaptor = new VPAdaptor(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        vpAdaptor.addFragment(new Tech(), "Tech");
+        vpAdaptor.addFragment(new Life(), "Life");
+        vpAdaptor.addFragment(new Ent(), "Ent");
+
+        viewPager.setAdapter(vpAdaptor);
 
     }
 }
