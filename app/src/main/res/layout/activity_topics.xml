@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +7,12 @@
     android:visibility="visible"
     tools:context=".Topics">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:id="@+id/recycler_main">
+
+    </androidx.recyclerview.widget.RecyclerView>
     <TextView
         android:id="@+id/welcomeTextView"
         android:layout_width="0dp"
@@ -36,4 +42,4 @@
         app:layout_constraintTop_toBottomOf="@+id/welcomeTextView"
         tools:layout_editor_absoluteX="0dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
