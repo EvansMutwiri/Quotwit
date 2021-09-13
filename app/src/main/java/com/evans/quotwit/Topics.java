@@ -1,5 +1,6 @@
 package com.evans.quotwit;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,32 +14,20 @@ import models.NewsApiResponse;
 
 public class Topics extends AppCompatActivity {
 
-    //topics list
-//    private final String[] topics = new String[] {
-//            "Radio", "Movies",
-//            "Soccer", "Consumer products", "Poetry", "Books and Literature",
-//            "Music", "Lyrics", "Programming", "Geek jokes",
-//            "News", "Astronomy", "Politics",
-//            "Cars", "Technology"
-//    };
     RecyclerView recyclerView;
     CustomAdapter adapter;
+
+    ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topics);
 
-//        ListView mListView = findViewById(R.id.topics_listView);
-//        TextView mWelcomeText = findViewById(R.id.welcomeTextView);
+        loading = new ProgressDialog(this);
+        loading.setTitle("Getting the latest content...");
+        loading.show();
 
-//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, topics);
-//        mListView.setAdapter(adapter);
-
-//        Intent topics = getIntent();
-//        String username = topics.getStringExtra("username");
-//
-//        mWelcomeText.setText(String.format("Hello there %s", username));
 
         // call get methods to get response
         RequestManager manager = new RequestManager(this);
@@ -49,6 +38,7 @@ public class Topics extends AppCompatActivity {
         @Override
         public void onFetchData(List<Headlines> list, String message) {
             showNews(list);
+            loading.dismiss();
         }
 
         @Override
