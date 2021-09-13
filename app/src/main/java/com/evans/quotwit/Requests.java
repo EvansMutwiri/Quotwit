@@ -4,7 +4,6 @@ import static com.evans.quotwit.Constants.API_KEY;
 import static com.evans.quotwit.Constants.BASE_URL;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import models.NewsApiResponse;
@@ -50,7 +49,7 @@ public class Requests {
 
         // error
         catch (Exception e){
-            Log.e("Error message!", "onFailure ", e);
+            e.printStackTrace();
         }
     }
 

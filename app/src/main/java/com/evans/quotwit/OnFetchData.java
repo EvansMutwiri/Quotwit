@@ -4,7 +4,7 @@ import java.util.List;
 
 import models.Headlines;
 
-public interface OnFetchData {
+public interface OnFetchData<NewsApiResponse> {
     void onFetchData(List<Headlines> list, String message);
     void onError (String message);
 }

@@ -18,9 +18,9 @@ public class TopicsViewHolder extends RecyclerView.ViewHolder {
     public TopicsViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        text_title = itemView.findViewById(R.id.tv_title);
-        text_source = itemView.findViewById(R.id.tv_source);
-        img_headline = itemView.findViewById(R.id.img_post);
+        text_title = itemView.findViewById(R.id.text_title);
+        text_source = itemView.findViewById(R.id.text_source);
+        img_headline = itemView.findViewById(R.id.img_headline);
         cardView =itemView.findViewById(R.id.topics_container);
     }
 }
