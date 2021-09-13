@@ -41,7 +41,7 @@ public class Topics extends AppCompatActivity {
 //        mWelcomeText.setText(String.format("Hello there %s", username));
 
         // call get methods to get response
-        Requests manager = new Requests(this);
+        RequestManager manager = new RequestManager(this);
         manager.getNewsHeadlines(listener, "general", null);
     }
 

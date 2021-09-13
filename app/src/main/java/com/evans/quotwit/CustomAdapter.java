@@ -13,7 +13,7 @@ import java.util.List;
 
 import models.Headlines;
 
-public class CustomAdapter extends RecyclerView.Adapter<TopicsViewHolder> {
+public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
     //objects
     private Context context;
     private List<Headlines> headlines;
@@ -25,13 +25,13 @@ public class CustomAdapter extends RecyclerView.Adapter<TopicsViewHolder> {
 
     @NonNull
     @Override
-    public TopicsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new TopicsViewHolder(LayoutInflater.from(context).inflate(R.layout.headline_list_items, parent, false));
+    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new CustomViewHolder(LayoutInflater.from(context).inflate(R.layout.headline_list_items, parent, false));
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TopicsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
 
         //call views for title image and source
         holder.text_title.setText(headlines.get(position).getTitle());

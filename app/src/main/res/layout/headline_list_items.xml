@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/topics_container"
     app:cardElevation="8dp"
     android:layout_margin="8dp">
 
     <LinearLayout
-        android:baselineAligned="false"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,17 +39,18 @@
                 android:maxLines="1"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="normal" />
+                android:textStyle="bold" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_headline"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/waffles"
+            android:scaleType="centerCrop"/>
     </LinearLayout>
-    
-    <ImageView
-        android:id="@+id/img_headline"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:src="@drawable/waffles"
-        android:scaleType="centerCrop"/>
+
 
 
 

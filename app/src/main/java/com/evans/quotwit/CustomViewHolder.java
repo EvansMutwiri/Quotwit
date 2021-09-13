@@ -8,14 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class TopicsViewHolder extends RecyclerView.ViewHolder {
+public class CustomViewHolder extends RecyclerView.ViewHolder {
 
     //objects for view items
     TextView text_title, text_source;
     ImageView img_headline;
     CardView cardView;
 
-    public TopicsViewHolder(@NonNull View itemView) {
+    public CustomViewHolder(@NonNull View itemView) {
         super(itemView);
 
         text_title = itemView.findViewById(R.id.text_title);

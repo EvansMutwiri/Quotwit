@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public class Requests {
+public class RequestManager {
     Context context;
 
     //retrofit object x make api calls
@@ -53,7 +53,7 @@ public class Requests {
         }
     }
 
-    public Requests(Context context) {
+    public RequestManager(Context context) {
         this.context = context;
     }
 
@@ -63,6 +63,7 @@ public class Requests {
         Call<NewsApiResponse> callHeadlines(
                 @Query("country") String country,
                 @Query("category") String category,
+//                @Query("sources") String sources,
                 @Query("q") String query,
                 @Query("apiKey") String API_KEY);
     }
