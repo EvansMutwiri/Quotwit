@@ -1,5 +1,8 @@
 package models;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Headlines {
     Source source = null;
     String author = "";
@@ -9,6 +12,9 @@ public class Headlines {
     String urlToImage = "";
     String publishedAt = "";
     String content = "";
+
+    public Headlines() {
+    }
 
     public Source getSource() {
         return source;

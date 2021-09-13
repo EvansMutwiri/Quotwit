@@ -12,8 +12,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 public class RequestManager {
     Context context;
@@ -57,14 +55,4 @@ public class RequestManager {
         this.context = context;
     }
 
-    //interface to manage api call
-    public interface CallApi {
-        @GET("top-headlines")
-        Call<NewsApiResponse> callHeadlines(
-                @Query("country") String country,
-                @Query("category") String category,
-//                @Query("sources") String sources,
-                @Query("q") String query,
-                @Query("apiKey") String API_KEY);
-    }
 }

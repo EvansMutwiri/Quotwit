@@ -1,12 +1,16 @@
 package com.evans.quotwit;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.parceler.Parcel;
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -60,5 +64,7 @@ public class Topics extends AppCompatActivity implements SelectListener{
     public void OnContentClick(Headlines headlines) {
         String headline = "Qtwit";
         Toast.makeText(this, headline, Toast.LENGTH_LONG).show();
+        startActivity(new Intent(Topics.this, ContentDetailsActivity.class)
+        .putExtra("data", Parcels.wrap(headlines)));
     }
 }

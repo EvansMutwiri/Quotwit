@@ -1,11 +1,16 @@
 package models;
 
-import java.util.List;
+import org.parceler.Parcel;
 
+import java.util.List;
+@Parcel
 public class NewsApiResponse {
     String status;
     int totalResults;
     List<Headlines> articles;
+
+    public NewsApiResponse() {
+    }
 
     public String getStatus() {
         return status;

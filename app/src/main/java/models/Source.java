@@ -1,8 +1,14 @@
 package models;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Source {
     String id ="";
     String name = "";
+
+    public Source() {
+    }
 
     public String getId() { return id;
     }

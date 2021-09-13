@@ -26,9 +26,9 @@
                 android:id="@+id/text_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:fontFamily="@font/josh_bold"
                 android:maxLines="3" />
 
             <TextView
@@ -38,8 +38,8 @@
                 android:layout_marginTop="6dp"
                 android:maxLines="1"
                 android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:fontFamily="@font/josh_light"/>
         </LinearLayout>
 
         <ImageView
