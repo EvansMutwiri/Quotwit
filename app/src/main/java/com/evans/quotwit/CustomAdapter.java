@@ -2,6 +2,7 @@ package com.evans.quotwit;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -18,9 +19,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
     private Context context;
     private List<Headlines> headlines;
 
-    public CustomAdapter(Context context, List<Headlines> headlines) {
+    //object for contnt click listener
+    private SelectListener listener;
+
+    public CustomAdapter(Context context, List<Headlines> headlines, SelectListener listener) {
         this.context = context;
         this.headlines = headlines;
+        this.listener = listener;
     }
 
     @NonNull
@@ -40,6 +45,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
         if (headlines.get(position).getUrlToImage()!=null){
             Picasso.get().load(headlines.get(position).getUrlToImage()).into(holder.img_headline);
         }
+        //card onclick listener
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.OnContentClick(headlines.get(position));
+            }
+        });
     }
 
     @Override

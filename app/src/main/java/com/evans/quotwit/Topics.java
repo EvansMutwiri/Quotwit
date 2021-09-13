@@ -2,6 +2,7 @@ package com.evans.quotwit;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,7 +13,7 @@ import java.util.List;
 import models.Headlines;
 import models.NewsApiResponse;
 
-public class Topics extends AppCompatActivity {
+public class Topics extends AppCompatActivity implements SelectListener{
 
     RecyclerView recyclerView;
     CustomAdapter adapter;
@@ -51,7 +52,13 @@ public class Topics extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_main);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        adapter = new CustomAdapter(this, list);
+        adapter = new CustomAdapter(this, list, this);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void OnContentClick(Headlines headlines) {
+        String headline = "Qtwit";
+        Toast.makeText(this, headline, Toast.LENGTH_LONG).show();
     }
 }
