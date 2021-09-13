@@ -16,7 +16,7 @@
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
-                app:cardElevation="8dp"
+                app:cardElevation="4dp"
                 android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -31,7 +31,7 @@
                         android:id="@+id/tv_content_detail"
                         android:textColor="@color/black"
                         android:fontFamily="@font/jost_regular"
-                        android:textSize="26sp"
+                        android:textSize="24sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <ImageView
