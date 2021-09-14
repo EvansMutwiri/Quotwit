@@ -1,4 +1,4 @@
-package com.evans.quotwit;
+package ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.evans.quotwit.R;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import models.LoginActivity;
 
 public class SignUpActivity extends AppCompatActivity {
 

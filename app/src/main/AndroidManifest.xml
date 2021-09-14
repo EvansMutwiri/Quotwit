@@ -12,25 +12,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Quotwit">
         <activity
+            android:theme="@style/NoActionBarTheme"
+            android:name=".SplashActivity"
+            android:exported="true" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ContentDetailsActivity"
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="models.Topics" />
+                android:value="ui.Topics" />
         </activity>
         <activity
-            android:name="models.Topics"
-            android:exported="true">
-        </activity>
+            android:name="ui.Topics"
+            android:exported="true" />
         <activity
-            android:name="models.LoginActivity"
+            android:name="ui.LoginActivity"
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.evans.quotwit.MainActivity" />
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name="ui.SignUpActivity"
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -40,11 +50,11 @@
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/NoActionBarTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

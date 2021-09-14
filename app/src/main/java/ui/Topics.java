@@ -1,4 +1,4 @@
-package models;
+package ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.evans.quotwit.ContentDetailsActivity;
 import com.evans.quotwit.CustomAdapter;
+import com.evans.quotwit.NewsApiResponse;
 import com.evans.quotwit.OnFetchData;
 import com.evans.quotwit.R;
 import com.evans.quotwit.RequestManager;
@@ -19,6 +20,8 @@ import com.evans.quotwit.SelectListener;
 import org.parceler.Parcels;
 
 import java.util.List;
+
+import models.Headlines;
 
 public class Topics extends AppCompatActivity implements SelectListener {
 
