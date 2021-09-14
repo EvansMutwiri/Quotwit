@@ -2,7 +2,10 @@
 
     import androidx.appcompat.app.AppCompatActivity;
 
+    import android.content.Intent;
     import android.os.Bundle;
+    import android.view.View;
+    import android.widget.Button;
     import android.widget.ImageView;
     import android.widget.TextView;
 
@@ -17,6 +20,7 @@
         Headlines headlines;
         TextView tv_title, tv_author, tv_time, tv_detail, tv_content;
         ImageView iv_image;
+        Button sharebtn;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,8 @@
             tv_detail = findViewById(R.id.tv_content_detail_detail);
             tv_content = findViewById(R.id.tv_content_detail_article);
             iv_image = findViewById(R.id.iv_content_detail);
+            sharebtn = findViewById(R.id.share_button);
+
 
             //unwrap parcelable
             headlines = Parcels.unwrap(getIntent().getParcelableExtra("data"));
@@ -39,6 +45,20 @@
             tv_detail.setText(headlines.getDescription());
             tv_content.setText(headlines.getContent());
             Picasso.get().load(headlines.getUrlToImage()).into(iv_image);
+
+            sharebtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent share = new Intent(Intent.ACTION_SEND);
+                    share.setType("text/plain");
+                    String details = "Check out this trending topic";
+                    String link = headlines.getUrl();
+
+                    share.putExtra(Intent.EXTRA_TEXT, details);
+                    share.putExtra(Intent.EXTRA_TEXT, link);
+                    startActivity(Intent.createChooser(share, "Share with:"));
+                }
+            });
 
         }
     }
