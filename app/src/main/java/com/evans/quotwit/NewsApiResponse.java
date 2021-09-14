@@ -1,8 +1,11 @@
-    package models;
+    package com.evans.quotwit;
 
     import org.parceler.Parcel;
 
     import java.util.List;
+
+    import models.Headlines;
+
     @Parcel
     public class NewsApiResponse {
         String status;
