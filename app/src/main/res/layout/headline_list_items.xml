@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/topics_container"
     app:cardElevation="8dp"
-    android:layout_margin="6dp">
+    android:layout_margin="8dp">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_margin="6dp"
         android:weightSum="3">
 
         <LinearLayout
@@ -20,39 +20,37 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:layout_margin="6dp">
+            android:layout_margin="8dp">
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/text_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="22sp"
                 android:textColor="@color/black"
-                android:maxLines="3">
-
-            </TextView>
+                android:maxLines="3" />
 
             <TextView
-                android:id="@+id/tv_source"
+                android:id="@+id/text_source"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:textSize="18sp"
-                android:textColor="@color/black"
                 android:layout_marginTop="6dp"
-                android:maxLines="1">
-
-            </TextView>
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_headline"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/waffles"
+            android:scaleType="centerCrop"/>
     </LinearLayout>
-    
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:src="@drawable/waffles"
-        android:scaleType="centerCrop"/>
+
 
 
 
