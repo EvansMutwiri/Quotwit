@@ -1,57 +1,39 @@
 package com.evans.quotwit;
 
-import android.app.ProgressDialog;
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
-import models.Headlines;
-import models.NewsApiResponse;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class Topics extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    CustomAdapter adapter;
-
-    ProgressDialog loading;
+    //topics list
+    private final String[] topics = new String[] {
+            "Radio", "Movies",
+            "Soccer", "Consumer products", "Poetry", "Books and Literature",
+            "Music", "Lyrics", "Programming", "Geek jokes",
+            "News", "Astronomy", "Politics",
+            "Cars", "Technology"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topics);
 
-        loading = new ProgressDialog(this);
-        loading.setTitle("Getting the latest content...");
-        loading.show();
+        ListView mListView = findViewById(R.id.topics_listView);
+        TextView mWelcomeText = findViewById(R.id.welcomeTextView);
 
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, topics);
+        mListView.setAdapter(adapter);
 
-        // call get methods to get response
-        RequestManager manager = new RequestManager(this);
-        manager.getNewsHeadlines(listener, "general", null);
-    }
+        Intent topics = getIntent();
+        String username = topics.getStringExtra("username");
 
-    private final OnFetchData<NewsApiResponse> listener = new OnFetchData<NewsApiResponse>() {
-        @Override
-        public void onFetchData(List<Headlines> list, String message) {
-            showNews(list);
-            loading.dismiss();
-        }
+        mWelcomeText.setText(String.format("Hello there %s", username));
 
-        @Override
-        public void onError(String message) {
-
-        }
-    };
-
-    private void showNews(List<Headlines> list) {
-        recyclerView = findViewById(R.id.recycler_main);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        adapter = new CustomAdapter(this, list);
-        recyclerView.setAdapter(adapter);
     }
 }

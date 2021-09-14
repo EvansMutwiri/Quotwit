@@ -14,7 +14,4 @@
     <string name="create_an_account">Create an Account</string>
     <string name="boldfont">\@font/Jost-Bold.tff</string>
     <string name="hello">Hello</string>
-    <string name="confirm">Please confirm</string>
-    <string name="exit">Exit</string>
-    <string name="api_key">76544e7ed0d74ff3b21dccd98bf04849</string>
 </resources>
