@@ -16,14 +16,14 @@
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.evans.quotwit.Topics" />
+                android:value="models.Topics" />
         </activity>
         <activity
-            android:name=".Topics"
+            android:name="models.Topics"
             android:exported="true">
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="models.LoginActivity"
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

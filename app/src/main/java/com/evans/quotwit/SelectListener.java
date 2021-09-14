@@ -1,7 +1,7 @@
-package com.evans.quotwit;
+    package com.evans.quotwit;
 
-import models.Headlines;
+    import models.Headlines;
 
-public interface SelectListener {
-    void OnContentClick(Headlines headlines);
-}
+    public interface SelectListener {
+        void OnContentClick(Headlines headlines);
+    }
