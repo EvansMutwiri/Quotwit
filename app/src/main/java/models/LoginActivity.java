@@ -1,13 +1,14 @@
-package com.evans.quotwit;
+package models;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.evans.quotwit.R;
 
 public class LoginActivity extends AppCompatActivity {
     private static final int PASSWORD_LENGTH = 6;
