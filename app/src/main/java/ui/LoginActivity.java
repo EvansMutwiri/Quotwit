@@ -1,4 +1,4 @@
-package models;
+package ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 

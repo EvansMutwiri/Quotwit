@@ -1,17 +1,22 @@
 package com.evans.quotwit;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Set;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import models.LoginActivity;
-import models.Topics;
+import ui.LoginActivity;
+import ui.SignUpActivity;
+import ui.Topics;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,5 +58,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent topics = new Intent(MainActivity.this, Topics.class);
             startActivity(topics);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder exit = new AlertDialog.Builder(this);
+        exit.setTitle("Exit");
+        exit.setMessage("Do you want to exit?");
+        exit.setCancelable(false);
+        exit.setPositiveButton("exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        exit.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //do nothing
+            }
+        });
+        exit.show();
     }
 }

@@ -6,7 +6,6 @@
     import android.content.Context;
     import android.widget.Toast;
 
-    import models.NewsApiResponse;
     import retrofit2.Call;
     import retrofit2.Callback;
     import retrofit2.Response;
