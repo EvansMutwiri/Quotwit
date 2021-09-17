@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         mPassword= findViewById(R.id.password);
 
-//        mSignUp = findViewById(R.id.registerTextView);
     }
 
     boolean validateInput() {
@@ -83,7 +82,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if(view == mSignUp) {
-//            Toast.makeText(this, "sign upoppppp", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
             startActivity(intent);
             finish();

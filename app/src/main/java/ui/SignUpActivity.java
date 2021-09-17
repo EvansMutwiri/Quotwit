@@ -57,7 +57,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    boolean validateInput (){
+    //custom input validation > replace with isValidEmail();
+    private boolean validateInput (){
         if (mUsername.getText().toString().equals("")){
             mUsername.setError("Please Choose Username");
             return false;
@@ -66,7 +67,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             mEmail.setError("Please Enter Email address");
             return false;
         }
-        if (mEmail.getText().toString().trim().matches(emailPattern)){
+        if (android.util.Patterns.EMAIL_ADDRESS.matcher(emailPattern).matches()){
             Toast.makeText(SignUpActivity.this, "email is valid", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -91,12 +92,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
             //send data to server
             createNewUser();
-
-            //call API BUT meanwhile ill add intent to login
-//            Intent login = new Intent(SignUpActivity.this, LoginActivity.class);
-//            login.putExtra("username", username);
-//            login.putExtra("password", password);
-//            startActivity(login);
 
         }
 

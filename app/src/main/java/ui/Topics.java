@@ -3,6 +3,9 @@ package ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,11 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.evans.quotwit.ContentDetailsActivity;
 import com.evans.quotwit.CustomAdapter;
+import com.evans.quotwit.MainActivity;
 import com.evans.quotwit.NewsApiResponse;
 import com.evans.quotwit.OnFetchData;
 import com.evans.quotwit.R;
 import com.evans.quotwit.RequestManager;
 import com.evans.quotwit.SelectListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.parceler.Parcels;
 
@@ -43,6 +48,33 @@ public class Topics extends AppCompatActivity implements SelectListener {
         // call get methods to get response
         RequestManager manager = new RequestManager(this);
         manager.getNewsHeadlines(listener, "general", null);
+    }
+
+    //Creating and Inflating an Overflow Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            logout();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void logout() {
+        FirebaseAuth.getInstance().signOut();
+
+        Intent intent = new Intent(Topics.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 
     private final OnFetchData<NewsApiResponse> listener = new OnFetchData<NewsApiResponse>() {
