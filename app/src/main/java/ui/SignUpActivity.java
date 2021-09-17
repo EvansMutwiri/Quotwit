@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.evans.quotwit.R;
@@ -13,12 +14,13 @@ import com.evans.quotwit.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
     @BindView(R.id.et_user_name) EditText mUsername;
     @BindView(R.id.et_email) EditText mEmail;
     @BindView(R.id.et_password) EditText mPassword;
     @BindView(R.id.et_repeat_password)EditText mRepeatPassword;
+    @BindView(R.id.loginTextView) TextView mLoginBtn;
 
     final int MIN_PASSWORD_LENGTH = 6;
 
@@ -29,6 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
+        mLoginBtn.setOnClickListener(this);
         viewInitializations();
     }
 
@@ -87,5 +90,15 @@ public class SignUpActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == mLoginBtn){
+            Intent toLogin = new Intent(SignUpActivity.this, LoginActivity.class);
+            toLogin.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(toLogin);
+            finish();
+        }
     }
 }
