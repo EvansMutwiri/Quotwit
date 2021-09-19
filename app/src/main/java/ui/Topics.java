@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.evans.quotwit.R;
 import com.evans.quotwit.RequestManager;
 import com.evans.quotwit.SelectListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.parceler.Parcels;
 
@@ -33,12 +35,28 @@ public class Topics extends AppCompatActivity implements SelectListener {
     RecyclerView recyclerView;
     CustomAdapter adapter;
 
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
     ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topics);
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                } else {
+                    getSupportActionBar().setTitle("Welcome, to Qtwit");
+                }
+            }
+        };
 
         loading = new ProgressDialog(this);
         loading.setTitle("Getting the latest content...");
@@ -48,6 +66,20 @@ public class Topics extends AppCompatActivity implements SelectListener {
         // call get methods to get response
         RequestManager manager = new RequestManager(this);
         manager.getNewsHeadlines(listener, "general", null);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
     //Creating and Inflating an Overflow Menu

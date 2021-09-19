@@ -71,7 +71,7 @@
                     android:drawableStart="@drawable/ic_baseline_email_24"
                     android:fontFamily="@font/josh_light"
                     android:gravity="center_vertical"
-                    android:hint="@string/username"
+                    android:hint="example@mail.com"
                     android:inputType="text"
                     android:padding="10dp"
                     android:scaleType="centerInside"
