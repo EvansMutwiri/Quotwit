@@ -31,7 +31,6 @@ import java.util.List;
 import models.Headlines;
 
 public class Topics extends AppCompatActivity implements SelectListener {
-
     RecyclerView recyclerView;
     CustomAdapter adapter;
 
