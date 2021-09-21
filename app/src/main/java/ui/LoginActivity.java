@@ -6,19 +6,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.evans.quotwit.R;
 
-public class LoginActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private static final int PASSWORD_LENGTH = 6;
     EditText mUsername;
     EditText mPassword;
+//    TextView mSignUp;
+    @BindView(R.id.registerTextView) TextView mSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ButterKnife.bind(this);
+
+        mSignUp.setOnClickListener(this);
         viewInitializations();
     }
 
@@ -31,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         mUsername.setText(username);
 
         mPassword= findViewById(R.id.password);
+
     }
 
     boolean validateInput() {
@@ -65,6 +76,15 @@ public class LoginActivity extends AppCompatActivity {
 
             Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
 
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == mSignUp) {
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }
