@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "464959238360",
+    "project_id": "qtwit-45ece",
+    "storage_bucket": "qtwit-45ece.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464959238360:android:edc68a28a064d40e97a7ad",
+        "android_client_info": {
+          "package_name": "com.evans.quotwit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464959238360-n6p3g8hiipfembooetila7ut10g65dfj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.evans.quotwit",
+            "certificate_hash": "463e0e4bf290a0dbbc289698a71ad34e300ee768"
+          }
+        },
+        {
+          "client_id": "464959238360-np6kv7tpn9e4ae5mtn85vf99acof43uq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClG-i8BITOmrFTyep9a3vAGj6-IlyOsQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "464959238360-np6kv7tpn9e4ae5mtn85vf99acof43uq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

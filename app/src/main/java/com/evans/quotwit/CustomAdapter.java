@@ -4,20 +4,24 @@
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
+    import android.widget.Filter;
+    import android.widget.Filterable;
 
     import androidx.annotation.NonNull;
     import androidx.recyclerview.widget.RecyclerView;
 
     import com.squareup.picasso.Picasso;
 
+    import java.util.ArrayList;
     import java.util.List;
 
     import models.Headlines;
 
-    public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> {
+    public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> implements Filterable {
         //objects
         private Context context;
         private List<Headlines> headlines;
+        private List<Headlines> headlinesAll;
 
         //object for contnt click listener
         private SelectListener listener;
@@ -25,6 +29,8 @@
         public CustomAdapter(Context context, List<Headlines> headlines, SelectListener listener) {
             this.context = context;
             this.headlines = headlines;
+            headlinesAll = new ArrayList<>(headlines);
+
             this.listener = listener;
         }
 
@@ -58,4 +64,40 @@
         public int getItemCount() {
             return headlines.size();
         }
+
+        //headlines filter objects for search view
+        @Override
+        public Filter getFilter() {
+            return headlinesFilter;
+        }
+
+        private Filter headlinesFilter = new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                List<Headlines> filteredHeadlines = new ArrayList<>();
+                if (charSequence == null || charSequence.length() == 0) {
+                    filteredHeadlines.addAll(headlinesAll);
+                } else {
+                    String filterPattern = charSequence.toString().toLowerCase().trim();
+
+                    for (Headlines item : headlinesAll) {
+                        if (item.getTitle().toLowerCase().contains(filterPattern) || item.getDescription().toLowerCase().contains(filterPattern)) {
+                            filteredHeadlines.add(item);
+                        }
+                    }
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredHeadlines;
+
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                headlines.clear();
+                headlines.addAll((List) filterResults.values);
+                notifyDataSetChanged();
+            }
+        };
     }
