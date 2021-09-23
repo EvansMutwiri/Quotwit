@@ -62,5 +62,8 @@ dependencies {
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
+
+    // bootom nav library
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
 }
 apply plugin: 'com.google.gms.google-services'
