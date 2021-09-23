@@ -1,90 +1,80 @@
 package ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.text.TextUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.evans.quotwit.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends AppCompatActivity{
     private static final int PASSWORD_LENGTH = 6;
-    EditText mUsername;
+    EditText mEmailTv;
     EditText mPassword;
-//    TextView mSignUp;
-    @BindView(R.id.registerTextView) TextView mSignUp;
+    Button mLoginBtn;
+    TextView mSignUp;
+
+    //firebase
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ButterKnife.bind(this);
+        mEmailTv = findViewById(R.id.email_tv);
+        mPassword = findViewById(R.id.password);
+        mLoginBtn = findViewById(R.id.bt_login);
+        mSignUp = findViewById(R.id.registerTextView);
 
-        mSignUp.setOnClickListener(this);
-        viewInitializations();
+        mAuth = FirebaseAuth.getInstance();
+
+        mLoginBtn.setOnClickListener(view -> {
+            loginUser();
+        });
+
+        mSignUp.setOnClickListener(view -> {
+            startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+        });
     }
 
-    void viewInitializations(){
-        mUsername= findViewById(R.id.username);
+    private void loginUser(){
+        String email = mEmailTv.getText().toString().trim();
+        String password = mPassword.getText().toString();
 
-        //set text from login intent
-        Intent login = getIntent();
-        String username = login.getStringExtra("username");
-        mUsername.setText(username);
+        if (TextUtils.isEmpty(email)){
+            mEmailTv.setError("Enter valid email");
+            mEmailTv.requestFocus();
+        } else if(TextUtils.isEmpty(password)){
+            mPassword.setError("Enter password");
+            mPassword.requestFocus();
+        }else if(password.length()< 6 ){
+            mPassword.setError("Password must be more than 6 characters");
+            mPassword.requestFocus();
+        } else {
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        Toast.makeText(LoginActivity.this, "Login successfull", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, Topics.class));
 
-        mPassword= findViewById(R.id.password);
-
-    }
-
-    boolean validateInput() {
-
-        if (mUsername.getText().toString().isEmpty()){
-            mUsername.setError("Enter Username");
-            return false;
+                    }else {
+                        Toast.makeText(LoginActivity.this, "ERROR: " +task.getException(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
-        if (mUsername.getText().toString().equals("")){
-            mUsername.setError("Enter Username");
-            return false;
-        }
-        if(mPassword.getText().toString().isEmpty() || mPassword.getText().toString().length()< PASSWORD_LENGTH){
-            mPassword.setError("Enter valid password");
-            return false;
-        }
-        return true;
-    }
 
-    public void viewTopics (View view) {
-        if (validateInput()) {
-
-            // Input is valid, here send data to your server
-
-            String username = mUsername.getText().toString();
-            String password = mPassword.getText().toString();
-
-            Intent topics = new Intent(LoginActivity.this, Topics.class);
-            topics.putExtra("username", username);
-
-            startActivity(topics);
-
-            Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
-
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        if(view == mSignUp) {
-            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-            startActivity(intent);
-            finish();
-        }
     }
 }

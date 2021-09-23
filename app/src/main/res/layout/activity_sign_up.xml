@@ -148,7 +148,6 @@
                 android:layout_marginTop="30dp"
                 android:background="@color/btnstroke"
                 android:elevation="2dp"
-                android:onClick="submitSignup"
                 android:fontFamily="@font/jost_medium"
                 android:text="@string/perf_signup"
                 android:textAllCaps="false"

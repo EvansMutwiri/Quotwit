@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.evans.quotwit.ContentDetailsActivity;
 import com.evans.quotwit.CustomAdapter;
-import com.evans.quotwit.MainActivity;
 import com.evans.quotwit.NewsApiResponse;
 import com.evans.quotwit.OnFetchData;
 import com.evans.quotwit.R;
@@ -36,7 +34,7 @@ public class Topics extends AppCompatActivity implements SelectListener {
     RecyclerView recyclerView;
     CustomAdapter adapter;
 
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     ProgressDialog loading;
@@ -47,17 +45,18 @@ public class Topics extends AppCompatActivity implements SelectListener {
         setContentView(R.layout.activity_topics);
 
         mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
-                } else {
-                    getSupportActionBar().setTitle("Welcome, to Qtwit");
-                }
-            }
-        };
+
+//        mAuthListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user != null) {
+//                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+//                } else {
+//                    getSupportActionBar().setTitle("Welcome, to Qtwit");
+//                }
+//            }
+//        };
 
         loading = new ProgressDialog(this);
         loading.setTitle("Getting the latest content...");
@@ -72,7 +71,12 @@ public class Topics extends AppCompatActivity implements SelectListener {
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+//        mAuth.addAuthStateListener(mAuthListener);
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null){
+            startActivity(new Intent(Topics.this, LoginActivity.class));
+        }
     }
 
     @Override
