@@ -26,8 +26,6 @@ public class SignUpActivity extends AppCompatActivity{
     public static final String TAG = SignUpActivity.class.getSimpleName();
 
     private FirebaseAuth mAuth;
-//    private String mName;
-//    Button btnRegister;
 
     //firebase auth listener
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -99,6 +97,7 @@ public class SignUpActivity extends AppCompatActivity{
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(SignUpActivity.this, "Account creation successfull", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
                     } else {
                         Toast.makeText(SignUpActivity.this, "Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
