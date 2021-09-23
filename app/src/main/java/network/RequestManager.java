@@ -1,4 +1,4 @@
-    package com.evans.quotwit;
+    package network;
 
     import static com.evans.quotwit.Constants.API_KEY;
     import static com.evans.quotwit.Constants.BASE_URL;
@@ -6,6 +6,10 @@
     import android.content.Context;
     import android.widget.Toast;
 
+    import com.evans.quotwit.CallApi;
+    import com.evans.quotwit.NewsApiResponse;
+
+    import network.OnFetchData;
     import retrofit2.Call;
     import retrofit2.Callback;
     import retrofit2.Response;
