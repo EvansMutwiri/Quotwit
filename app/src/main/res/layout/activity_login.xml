@@ -63,7 +63,7 @@
                 app:layout_constraintWidth_percent="0.7">
 
                 <EditText
-                    android:id="@+id/username"
+                    android:id="@+id/email_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:height="50dp"
@@ -114,7 +114,6 @@
                 android:background="@color/btnstroke"
                 android:elevation="2dp"
                 android:fontFamily="@font/jost_regular"
-                android:onClick="viewTopics"
                 android:text="Login"
                 android:textAllCaps="false"
                 android:textColor="#FFF"
