@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -18,7 +19,10 @@ import com.evans.quotwit.ContentDetailsActivity;
 import com.evans.quotwit.CustomAdapter;
 import com.evans.quotwit.NewsApiResponse;
 import com.evans.quotwit.R;
+import com.evans.quotwit.SavedContent;
 import com.evans.quotwit.SelectListener;
+import com.evans.quotwit.UserProfileActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -36,6 +40,7 @@ public class Topics extends AppCompatActivity implements SelectListener {
 
     FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    BottomNavigationView bottomNavigationView;
 
     ProgressDialog loading;
 
@@ -61,6 +66,32 @@ public class Topics extends AppCompatActivity implements SelectListener {
         loading = new ProgressDialog(this);
         loading.setTitle("Getting the latest content...");
         loading.show();
+
+        //bottom nav
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+
+        //item selector listener
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.saved:
+                        startActivity(new Intent(getApplicationContext(), SavedContent.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.home:
+                        return true;
+
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+                        return true;
+                }
+                return false;
+            }
+        });
 
 
         // call get methods to get response

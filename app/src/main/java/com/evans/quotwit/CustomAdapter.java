@@ -1,22 +1,21 @@
     package com.evans.quotwit;
 
     import android.content.Context;
-    import android.view.LayoutInflater;
-    import android.view.View;
-    import android.view.ViewGroup;
-    import android.widget.Filter;
-    import android.widget.Filterable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
-    import androidx.annotation.NonNull;
-    import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-    import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Picasso;
 
-    import java.util.ArrayList;
-    import java.util.Collection;
-    import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
-    import models.Headlines;
+import models.Headlines;
 
     public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> implements Filterable {
         //objects
