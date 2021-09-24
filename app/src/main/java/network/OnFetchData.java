@@ -1,4 +1,4 @@
-    package com.evans.quotwit;
+    package network;
 
     import java.util.List;
 

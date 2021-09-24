@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,10 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.evans.quotwit.ContentDetailsActivity;
 import com.evans.quotwit.CustomAdapter;
 import com.evans.quotwit.NewsApiResponse;
-import com.evans.quotwit.OnFetchData;
 import com.evans.quotwit.R;
-import com.evans.quotwit.RequestManager;
+import com.evans.quotwit.SavedContent;
 import com.evans.quotwit.SelectListener;
+import com.evans.quotwit.UserProfileActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,6 +31,8 @@ import org.parceler.Parcels;
 import java.util.List;
 
 import models.Headlines;
+import network.OnFetchData;
+import network.RequestManager;
 
 public class Topics extends AppCompatActivity implements SelectListener {
     RecyclerView recyclerView;
@@ -36,6 +40,7 @@ public class Topics extends AppCompatActivity implements SelectListener {
 
     FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    BottomNavigationView bottomNavigationView;
 
     ProgressDialog loading;
 
@@ -62,6 +67,32 @@ public class Topics extends AppCompatActivity implements SelectListener {
         loading.setTitle("Getting the latest content...");
         loading.show();
 
+        //bottom nav
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.home);
+
+        //item selector listener
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.saved:
+                        startActivity(new Intent(getApplicationContext(), SavedContent.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.home:
+                        return true;
+
+                    case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+                        return true;
+                }
+                return false;
+            }
+        });
+
 
         // call get methods to get response
         RequestManager manager = new RequestManager(this);
@@ -85,45 +116,6 @@ public class Topics extends AppCompatActivity implements SelectListener {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
-    }
-
-    //Creating and Inflating an Overflow Menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-
-        MenuItem.OnActionExpandListener onActionExpandListener = new MenuItem.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem menuItem) {
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
-                return true;
-            }
-        };
-
-        menu.findItem(R.id.searchview).setOnActionExpandListener(onActionExpandListener);
-        SearchView searchView = (SearchView) menu.findItem(R.id.searchview).getActionView();
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setQueryHint("Search..");
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -172,5 +164,45 @@ public class Topics extends AppCompatActivity implements SelectListener {
         Toast.makeText(this, headline, Toast.LENGTH_LONG).show();
         startActivity(new Intent(Topics.this, ContentDetailsActivity.class)
         .putExtra("data", Parcels.wrap(headlines)));
+    }
+
+    //Creating and Inflating an Overflow Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        MenuItem.OnActionExpandListener onActionExpandListener = new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem menuItem) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem menuItem) {
+                return true;
+            }
+        };
+
+        menu.findItem(R.id.searchview).setOnActionExpandListener(onActionExpandListener);
+        SearchView searchView = (SearchView) menu.findItem(R.id.searchview).getActionView();
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setQueryHint("Search..");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 }

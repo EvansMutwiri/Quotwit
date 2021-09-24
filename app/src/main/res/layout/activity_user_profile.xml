@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="ui.Topics"
+    tools:context=".UserProfileActivity"
     android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_main"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="6"
-        android:layout_margin="8dp">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        android:text="user prof here"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:layout_margin="30dp"
         app:menu="@menu/botton_nav"
         app:labelVisibilityMode="unlabeled"
         app:itemTextColor="@drawable/selector"
         android:id="@+id/bottom_nav"/>
 
-</LinearLayout>
+</RelativeLayout>

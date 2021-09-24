@@ -1,35 +1,35 @@
     package com.evans.quotwit;
 
     import android.content.Context;
-    import android.view.LayoutInflater;
-    import android.view.View;
-    import android.view.ViewGroup;
-    import android.widget.Filter;
-    import android.widget.Filterable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
-    import androidx.annotation.NonNull;
-    import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-    import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Picasso;
 
-    import java.util.ArrayList;
-    import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
-    import models.Headlines;
+import models.Headlines;
 
     public class CustomAdapter extends RecyclerView.Adapter<CustomViewHolder> implements Filterable {
         //objects
-        private Context context;
-        private List<Headlines> headlines;
-        private List<Headlines> headlinesAll;
+        Context context;
+        List<Headlines> headlines;
+        List<Headlines> headlinesAll;
 
         //object for contnt click listener
-        private SelectListener listener;
+        SelectListener listener;
 
         public CustomAdapter(Context context, List<Headlines> headlines, SelectListener listener) {
             this.context = context;
-            this.headlines = headlines;
-            headlinesAll = new ArrayList<>(headlines);
+            this.headlinesAll = headlines;
+            this.headlines = new ArrayList<>(headlinesAll);
 
             this.listener = listener;
         }
@@ -89,12 +89,14 @@
 
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = filteredHeadlines;
+                filterResults.count = filteredHeadlines.size();
 
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
                 headlines.clear();
                 headlines.addAll((List) filterResults.values);
                 notifyDataSetChanged();
