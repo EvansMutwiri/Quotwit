@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.evans.quotwit.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -29,12 +28,12 @@ import butterknife.ButterKnife;
 public class SignUpActivity extends AppCompatActivity{
 
     public static final String TAG = SignUpActivity.class.getSimpleName();
-    private String username;
+    String username;
 
     private FirebaseAuth mAuth;
 
     //firebase auth listener
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseAuth.AuthStateListener mAuthListener;
 
     @BindView(R.id.et_user_name) EditText mNameEditText;
     @BindView(R.id.et_email) EditText mEmailEditText;
@@ -42,8 +41,6 @@ public class SignUpActivity extends AppCompatActivity{
     @BindView(R.id.et_repeat_password)EditText mConfirmPasswordEditText;
     @BindView(R.id.loginTextView) TextView mLoginBtn;
     @BindView(R.id.bt_register) Button btnRegister;
-//    @BindView(R.id.firebaseProgressBar) ProgressBar mSignInProgressBar;
-//    @BindView(R.id.loadingTextView) TextView mLoadingSignUp;
 
     @BindView(R.id.firebaseProgressBar) ProgressBar firebaseProgressBar;
     @BindView(R.id.loadingTextView) TextView loadingTextView;
@@ -64,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity{
         btnRegister.setOnClickListener(view -> {
             createNewUser();
         });
+        createAuthStateListener();
     }
 
     private void showProgressBar() {
@@ -84,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity{
 
     private void createNewUser() {
         username = mNameEditText.getText().toString().trim();
-        String email = mEmailEditText.getText().toString().trim();
+        final String email = mEmailEditText.getText().toString().trim();
         String password = mPasswordEditText.getText().toString();
         String repeatpass = mConfirmPasswordEditText.getText().toString();
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -115,18 +113,16 @@ public class SignUpActivity extends AppCompatActivity{
             mConfirmPasswordEditText.requestFocus();
         } else {
             showProgressBar();
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    hideProgressBar();
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                hideProgressBar();
 
-                    if(task.isSuccessful()){
-                        createFirebaseUserProfile(Objects.requireNonNull(task.getResult().getUser()));
-                        Toast.makeText(SignUpActivity.this, "Account creation successfull", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignUpActivity.this, Topics.class));
-                    } else {
-                        Toast.makeText(SignUpActivity.this, "Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                    }
+                if(task.isSuccessful()){
+                    createFirebaseUserProfile(Objects.requireNonNull(task.getResult().getUser()));
+                    Toast.makeText(SignUpActivity.this, "Account creation successfull", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(SignUpActivity.this, Topics.class));
+                    finish();
+                } else {
+                    Toast.makeText(SignUpActivity.this, "Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -149,5 +145,22 @@ public class SignUpActivity extends AppCompatActivity{
                     }
 
                 });
+    }
+
+    private void createAuthStateListener() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(SignUpActivity.this, Topics.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+
+        };
     }
 }
