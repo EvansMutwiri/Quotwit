@@ -3,6 +3,7 @@ package ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -153,7 +154,7 @@ public class SignUpActivity extends AppCompatActivity{
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-//                            Log.d(TAG, Objects.requireNonNull(user.getDisplayName()));
+                            Log.d(TAG, Objects.requireNonNull(user.getDisplayName()));
                             Toast.makeText(SignUpActivity.this, "The display name has ben set", Toast.LENGTH_LONG).show();
                         }
                     }
