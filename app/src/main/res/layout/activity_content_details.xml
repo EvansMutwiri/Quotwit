@@ -41,7 +41,8 @@
                             android:src="@drawable/waffles"
                             android:layout_marginTop="6dp"
                             android:layout_width="match_parent"
-                            android:layout_height="300dp"/>
+                            android:layout_height="300dp"
+                            android:contentDescription="DEFAULT" />
                         <TextView
                             android:id="@+id/tv_content_detail_author"
                             android:layout_marginTop="4dp"
@@ -70,6 +71,8 @@
                     android:fontFamily="@font/josh_light"
                     android:textColor="@color/black"
                     android:layout_marginTop="6dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -79,6 +82,8 @@
                     android:fontFamily="@font/josh_light"
                     android:textColor="@color/black"
                     android:layout_marginTop="6dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginEnd="18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -88,22 +93,24 @@
                     android:orientation="horizontal">
                     <Button
                         android:id="@+id/share_button"
-                        android:drawableLeft="@android:drawable/ic_menu_share"
+                        android:drawableStart="@drawable/ic_baseline_share_24"
                         android:text="share"
                         android:elevation="8dp"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="16dp"
+                        android:layout_marginStart="18dp"
                         android:layout_height="wrap_content"/>
 
                     <Button
-                        android:drawableLeft="@android:drawable/ic_menu_save"
+                        android:drawableStart="@drawable/ic_baseline_save_24"
                         android:id="@+id/save_button"
                         android:text="save"
                         android:elevation="8dp"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
+                        android:layout_marginEnd="18dp"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
