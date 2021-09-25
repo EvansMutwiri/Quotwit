@@ -19,7 +19,7 @@ import com.evans.quotwit.ContentDetailsActivity;
 import com.evans.quotwit.CustomAdapter;
 import com.evans.quotwit.NewsApiResponse;
 import com.evans.quotwit.R;
-import com.evans.quotwit.SavedContent;
+import com.evans.quotwit.SavedContentActivity;
 import com.evans.quotwit.SelectListener;
 import com.evans.quotwit.UserProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,10 +53,10 @@ public class Topics extends AppCompatActivity implements SelectListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topics);
 
-//        mUser = mAuth.getCurrentUser();
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -84,7 +84,7 @@ public class Topics extends AppCompatActivity implements SelectListener {
                 switch (item.getItemId())
                 {
                     case R.id.saved:
-                        startActivity(new Intent(getApplicationContext(), SavedContent.class));
+                        startActivity(new Intent(getApplicationContext(), SavedContentActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
@@ -102,7 +102,7 @@ public class Topics extends AppCompatActivity implements SelectListener {
 
         // call get methods to get response
         RequestManager manager = new RequestManager(this);
-        manager.getNewsHeadlines(listener, "general", null);
+        manager.getNewsHeadlines(listener, "technology", null);
     }
 
     @Override

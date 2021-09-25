@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Quotwit">
         <activity
+            android:name=".SavedContentListActivity"
+            android:exported="true" />
+        <activity
             android:name=".UserProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".SavedContent"
+            android:name=".SavedContentActivity"
             android:exported="true" />
         <activity
             android:name=".SplashActivity"

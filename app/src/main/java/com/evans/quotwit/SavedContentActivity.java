@@ -11,14 +11,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ui.Topics;
 
-public class SavedContent extends AppCompatActivity {
+public class SavedContentActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_saved_content);
+        setContentView(R.layout.activity_topics);
 
         //bottom nav
         bottomNavigationView = findViewById(R.id.bottom_nav);

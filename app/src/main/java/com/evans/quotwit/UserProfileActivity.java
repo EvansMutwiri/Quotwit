@@ -31,7 +31,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 switch (item.getItemId())
                 {
                     case R.id.saved:
-                        startActivity(new Intent(getApplicationContext(), SavedContent.class));
+                        startActivity(new Intent(getApplicationContext(), SavedContentActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 

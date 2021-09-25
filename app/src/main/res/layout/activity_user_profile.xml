@@ -7,13 +7,71 @@
     tools:context=".UserProfileActivity"
     android:orientation="vertical">
 
-    <TextView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerInParent="true"
-        android:textAlignment="center"
-        android:text="user prof here"/>
+        android:elevation="8dp"
+        app:cardBackgroundColor="#F1FFFC">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="-10dp"
+                app:cardBackgroundColor="#B5FFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_image"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/user_prof_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="username"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="30dp"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/user_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="email"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="30dp"
+                        android:textAlignment="center"
+                        android:layout_below="@id/user_prof_name"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="user prof here"
+                android:layout_marginTop="30dp"
+                android:textAlignment="center" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_below="@+id/welcome"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/waffles"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
