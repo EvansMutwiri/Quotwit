@@ -19,7 +19,7 @@
             android:layout_margin="20dp">
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="10dp"
                 app:cardBackgroundColor="#B5FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,14 +29,17 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/user_prof_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="username"
-                        android:textColor="@color/black"
                         android:layout_marginTop="30dp"
-                        android:textAlignment="center" />
+                        android:text="username"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:drawablePadding="5dp"
+                        app:drawableStartCompat="@drawable/ic_twotone_person_outline_24" />
 
                     <TextView
                         android:id="@+id/user_email"
@@ -47,6 +50,8 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="30dp"
                         android:textAlignment="center"
+                        android:drawablePadding="5dp"
+                        app:drawableStartCompat="@drawable/ic_twotone_email_24"
                         android:layout_below="@id/user_prof_name"/>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
