@@ -207,8 +207,7 @@ public class Topics extends AppCompatActivity implements SelectListener {
                 try {
                     adapter.getFilter().filter(newText);
                 } catch (Exception e) {
-//                    e.getCause().toString();
-                    Toast.makeText(Topics.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Topics.this, "Something went wrong" + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
                 return false;
