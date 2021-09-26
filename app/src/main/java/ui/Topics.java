@@ -1,6 +1,7 @@
 package ui;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -215,5 +217,26 @@ public class Topics extends AppCompatActivity implements SelectListener {
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder exit = new AlertDialog.Builder(this);
+        exit.setTitle("Exit");
+        exit.setMessage("Do you want to exit?");
+        exit.setCancelable(false);
+        exit.setPositiveButton("exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        exit.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //do nothing
+            }
+        });
+        exit.show();
     }
 }
