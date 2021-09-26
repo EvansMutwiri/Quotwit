@@ -210,7 +210,7 @@ public class Topics extends AppCompatActivity implements SelectListener {
                     Toast.makeText(Topics.this, "Something went wrong" + e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
-                return false;
+                return true;
             }
         });
 

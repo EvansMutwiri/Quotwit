@@ -67,5 +67,10 @@ dependencies {
     implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //image
+
+    implementation 'com.github.Drjacky:ImagePicker:2.1.13'
+
 }
 apply plugin: 'com.google.gms.google-services'
