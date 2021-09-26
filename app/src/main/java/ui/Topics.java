@@ -204,7 +204,13 @@ public class Topics extends AppCompatActivity implements SelectListener {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
+                try {
+                    adapter.getFilter().filter(newText);
+                } catch (Exception e) {
+//                    e.getCause().toString();
+                    Toast.makeText(Topics.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                }
+
                 return false;
             }
         });
