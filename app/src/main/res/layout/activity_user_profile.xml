@@ -19,13 +19,14 @@
             android:layout_margin="20dp">
 
             <androidx.cardview.widget.CardView
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="#B5FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile_image"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp">
+                app:cardBackgroundColor="#B5FFFFFF">
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -35,24 +36,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
+                        android:drawablePadding="5dp"
                         android:text="username"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:drawablePadding="5dp"
                         app:drawableStartCompat="@drawable/ic_twotone_person_outline_24" />
 
                     <TextView
                         android:id="@+id/user_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="email"
-                        android:textColor="@color/black"
+                        android:layout_below="@id/user_prof_name"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="30dp"
-                        android:textAlignment="center"
                         android:drawablePadding="5dp"
-                        app:drawableStartCompat="@drawable/ic_twotone_email_24"
-                        android:layout_below="@id/user_prof_name"/>
+                        android:text="email"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        app:drawableStartCompat="@drawable/ic_twotone_email_24" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
@@ -60,8 +61,8 @@
                 android:id="@+id/welcome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="user prof here"
                 android:layout_marginTop="30dp"
+                android:text="user prof here"
                 android:textAlignment="center" />
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -74,6 +75,22 @@
                 android:src="@drawable/waffles"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp" />
+
+            <ImageView
+                android:id="@+id/edit_profile_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/profile_image"
+                android:layout_alignRight="@id/profile_image"
+                android:layout_alignBottom="@id/profile_image"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="-290dp"
+                android:layout_marginTop="-32dp"
+                android:layout_marginEnd="274dp"
+                android:layout_marginBottom="1dp"
+                android:layout_toEndOf="@+id/profile_image"
+                android:gravity="bottom"
+                android:src="@drawable/baseline_camera_alt_black_48" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

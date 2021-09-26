@@ -1,10 +1,13 @@
 package com.evans.quotwit;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.provider.MediaStore;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,9 +25,11 @@ import ui.Topics;
 
 public class UserProfileActivity extends AppCompatActivity {
 
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
     private FirebaseUser fUser;
     private DatabaseReference databaseReference;
     private String userID;
+    private ImageView profileEdit;
 
 
     BottomNavigationView bottomNavigationView;
@@ -42,6 +47,7 @@ public class UserProfileActivity extends AppCompatActivity {
         final TextView profileName = (TextView) findViewById(R.id.user_prof_name);
         final TextView userEmail = (TextView) findViewById(R.id.user_email);
         final ImageView profileImage = (ImageView) findViewById(R.id.profile_image);
+        profileEdit = (ImageView) findViewById(R.id.edit_profile_image);
 
         databaseReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -70,26 +76,42 @@ public class UserProfileActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.profile);
 
         //item selector listener
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId())
+            {
+                case R.id.saved:
+                    startActivity(new Intent(getApplicationContext(), SavedContentActivity.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.home:
+                    startActivity(new Intent(getApplicationContext(), Topics.class));
+                    overridePendingTransition(0,0);
+                    return true;
+
+                case R.id.profile:
+                    return true;
+            }
+            return false;
+        });
+
+        profileEdit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId())
-                {
-                    case R.id.saved:
-                        startActivity(new Intent(getApplicationContext(), SavedContentActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(), Topics.class));
-                        overridePendingTransition(0,0);
-                        return true;
-
-                    case R.id.profile:
-                        return true;
-                }
-                return false;
+            public void onClick(View view) {
+                //open gallery
+                openCamera();
             }
         });
+    }
+
+    private void openCamera() {
+        Toast.makeText(this, "Open Camera", Toast.LENGTH_SHORT).show();
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
