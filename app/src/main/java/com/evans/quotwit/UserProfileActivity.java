@@ -34,11 +34,15 @@ import ui.Topics;
 
 public class UserProfileActivity extends AppCompatActivity {
 
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
+//    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static final int CAMERA_PERM_CODE = 101;
+    public static final int CAM_REQUEST_CODE = 102;
     private FirebaseUser fUser;
     private DatabaseReference databaseReference;
     private String userID;
     private ImageView profileEdit;
+
+    String currentPhotoPath;
 
 
     BottomNavigationView bottomNavigationView;
@@ -124,7 +128,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 }
             });
     private void openCamera() {
-//        Toast.makeText(this, "Open Camera", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Open Camera", Toast.LENGTH_SHORT).show();
         ImagePicker.Companion.with(UserProfileActivity.this)
                 .crop()
                 .cropOval()
