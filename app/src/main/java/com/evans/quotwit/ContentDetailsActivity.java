@@ -1,26 +1,27 @@
     package com.evans.quotwit;
 
-    import androidx.appcompat.app.AppCompatActivity;
-
-    import android.content.Context;
+    import android.app.AlertDialog;
+    import android.content.DialogInterface;
     import android.content.Intent;
-    import android.os.Bundle;
-    import android.view.LayoutInflater;
-    import android.view.View;
-    import android.view.ViewGroup;
-    import android.widget.Button;
-    import android.widget.ImageView;
-    import android.widget.TextView;
-    import android.widget.Toast;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-    import com.google.firebase.database.DatabaseReference;
-    import com.google.firebase.database.FirebaseDatabase;
-    import com.squareup.picasso.Picasso;
+import androidx.appcompat.app.AppCompatActivity;
 
-    import org.parceler.Parcels;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
-    import butterknife.ButterKnife;
-    import models.Headlines;
+import org.parceler.Parcels;
+
+import models.Headlines;
+    import ui.LoginActivity;
 
     public class ContentDetailsActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -75,11 +76,32 @@
         @Override
         public void onClick(View view) {
             if (view == save_button) {
-                DatabaseReference detailsRef = FirebaseDatabase
-                        .getInstance()
-                        .getReference(Constants.FIREBASE_CHILD_DETAILS);
-                detailsRef.push().setValue(headlines);
-                Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user !=null){
+                    String uid = user.getUid();
+                    DatabaseReference detailsRef = FirebaseDatabase
+                            .getInstance()
+                            .getReference(Constants.FIREBASE_CHILD_DETAILS)
+                            .child(uid);
+
+                    DatabaseReference pushRef = detailsRef.push();
+                    String pushId = pushRef.getKey();
+                    headlines.setPushId(pushId);
+                    pushRef.setValue(headlines);
+                    Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+                } else {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                    alert.setTitle("Not allowed");
+                    alert.setMessage("You must be signed in to save!");
+                    alert.setPositiveButton("Signin", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(ContentDetailsActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    alert.create().show();
+                }
             }
         }
     }

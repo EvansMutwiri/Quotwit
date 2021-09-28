@@ -1,8 +1,5 @@
 package com.evans.quotwit;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.Set;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,18 +42,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view == mSignupbtn) {
             Intent signup = new Intent(MainActivity.this, SignUpActivity.class);
             startActivity(signup);
+            finish();
         }
 
         if (view == mLoginbtn) {
             Toast.makeText(MainActivity.this, "log in", Toast.LENGTH_LONG).show();
             Intent login = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(login);
+            finish();
         }
 
         if (view == mTextView) {
             Toast.makeText(MainActivity.this, "skip", Toast.LENGTH_SHORT).show();
             Intent topics = new Intent(MainActivity.this, Topics.class);
             startActivity(topics);
+            finish();
         }
     }
 
