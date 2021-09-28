@@ -1,6 +1,10 @@
     package models;
 
+    import org.ocpsoft.prettytime.PrettyTime;
     import org.parceler.Parcel;
+
+    import java.util.Date;
+    import java.util.Locale;
 
     @Parcel
     public class Headlines {
@@ -12,6 +16,15 @@
         String urlToImage = "";
         String publishedAt = "";
         String content = "";
+        String pushId = "";
+
+        public String getPushId() {
+            return pushId;
+        }
+
+        public void setPushId(String pushId) {
+            this.pushId = pushId;
+        }
 
         public Headlines() {
         }
@@ -65,7 +78,7 @@
         }
 
         public String getPublishedAt() {
-            return publishedAt;
+            return new PrettyTime(Locale.getDefault()).format(new Date());
         }
 
         public void setPublishedAt(String publishedAt) {

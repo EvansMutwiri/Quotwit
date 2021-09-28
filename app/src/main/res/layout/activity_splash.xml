@@ -8,11 +8,13 @@
 
     <ImageView
         android:id="@+id/splash_image"
-        android:layout_width="386dp"
-        android:layout_height="402dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/qtwit" />
+        app:layout_constraintVertical_bias="0.339"
+        app:srcCompat="@drawable/img" />
 </androidx.constraintlayout.widget.ConstraintLayout>

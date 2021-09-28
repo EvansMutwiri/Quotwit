@@ -1,6 +1,7 @@
 package ui;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -19,12 +21,14 @@ import com.evans.quotwit.ContentDetailsActivity;
 import com.evans.quotwit.CustomAdapter;
 import com.evans.quotwit.NewsApiResponse;
 import com.evans.quotwit.R;
-import com.evans.quotwit.SavedContent;
+import com.evans.quotwit.SavedContentActivity;
 import com.evans.quotwit.SelectListener;
 import com.evans.quotwit.UserProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.parceler.Parcels;
 
@@ -39,6 +43,8 @@ public class Topics extends AppCompatActivity implements SelectListener {
     CustomAdapter adapter;
 
     FirebaseAuth mAuth;
+    FirebaseUser mUser;
+    DatabaseReference mUserRef;
     private FirebaseAuth.AuthStateListener mAuthListener;
     BottomNavigationView bottomNavigationView;
 
@@ -49,19 +55,21 @@ public class Topics extends AppCompatActivity implements SelectListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topics);
 
-        mAuth = FirebaseAuth.getInstance();
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-//        mAuthListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser user = firebaseAuth.getCurrentUser();
-//                if (user != null) {
-//                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
-//                } else {
-//                    getSupportActionBar().setTitle("Welcome, to Qtwit");
-//                }
-//            }
-//        };
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    getSupportActionBar().setTitle("Welcome, " + user.getDisplayName() + "!");
+                } else {
+                    getSupportActionBar().setTitle("Welcome, to Qtwit");
+                }
+            }
+        };
 
         loading = new ProgressDialog(this);
         loading.setTitle("Getting the latest content...");
@@ -78,7 +86,7 @@ public class Topics extends AppCompatActivity implements SelectListener {
                 switch (item.getItemId())
                 {
                     case R.id.saved:
-                        startActivity(new Intent(getApplicationContext(), SavedContent.class));
+                        startActivity(new Intent(getApplicationContext(), SavedContentActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
@@ -96,13 +104,13 @@ public class Topics extends AppCompatActivity implements SelectListener {
 
         // call get methods to get response
         RequestManager manager = new RequestManager(this);
-        manager.getNewsHeadlines(listener, "general", null);
+        manager.getNewsHeadlines(listener, "technology", null);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-//        mAuth.addAuthStateListener(mAuthListener);
+        mAuth.addAuthStateListener(mAuthListener);
 
         FirebaseUser user = mAuth.getCurrentUser();
         if (user == null){
@@ -198,11 +206,37 @@ public class Topics extends AppCompatActivity implements SelectListener {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
+                try {
+                    adapter.getFilter().filter(newText);
+                } catch (Exception e) {
+                    Toast.makeText(Topics.this, "Something went wrong" + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+                return true;
             }
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder exit = new AlertDialog.Builder(this);
+        exit.setTitle("Exit");
+        exit.setMessage("Do you want to exit?");
+        exit.setCancelable(false);
+        exit.setPositiveButton("exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        exit.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //do nothing
+            }
+        });
+        exit.show();
     }
 }
