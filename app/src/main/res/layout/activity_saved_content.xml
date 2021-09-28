@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
-        android:layout_margin="30dp"
+        android:layout_margin="0dp"
         app:menu="@menu/botton_nav"
         app:labelVisibilityMode="unlabeled"
         app:itemTextColor="@drawable/selector"
