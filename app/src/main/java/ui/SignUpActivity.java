@@ -3,6 +3,8 @@ package ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,11 +16,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.evans.quotwit.R;
+import com.evans.quotwit.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
@@ -81,11 +85,11 @@ public class SignUpActivity extends AppCompatActivity{
     }
 
     private void createNewUser() {
-        username = mNameEditText.getText().toString().trim();
+        String username = mNameEditText.getText().toString().trim();
         final String email = mEmailEditText.getText().toString().trim();
         String password = mPasswordEditText.getText().toString();
         String repeatpass = mConfirmPasswordEditText.getText().toString();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+//        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
 //        String validUsername = username;
 
@@ -96,7 +100,7 @@ public class SignUpActivity extends AppCompatActivity{
         else if (TextUtils.isEmpty(email)){
             mEmailEditText.setError("Enter valid email");
             mEmailEditText.requestFocus();
-        }else if (!mEmailEditText.getText().toString().trim().matches(emailPattern)){
+        }else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             mEmailEditText.setError("Enter valid email");
             mEmailEditText.requestFocus();
         }
@@ -117,10 +121,21 @@ public class SignUpActivity extends AppCompatActivity{
                 hideProgressBar();
 
                 if(task.isSuccessful()){
+                    User user = new User(username, email);
                     createFirebaseUserProfile(Objects.requireNonNull(task.getResult().getUser()));
-                    Toast.makeText(SignUpActivity.this, "Account creation successfull", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignUpActivity.this, Topics.class));
-                    finish();
+
+                    FirebaseDatabase.getInstance().getReference("Users")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
+                            fUser.sendEmailVerification();
+                            Toast.makeText(SignUpActivity.this, "Check your email to verify account", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                            finish();
+                        }
+                    });
                 } else {
                     Toast.makeText(SignUpActivity.this, "Failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -139,7 +154,7 @@ public class SignUpActivity extends AppCompatActivity{
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-//                            Log.d(TAG, Objects.requireNonNull(user.getDisplayName()));
+                            Log.d(TAG, Objects.requireNonNull(user.getDisplayName()));
                             Toast.makeText(SignUpActivity.this, "The display name has ben set", Toast.LENGTH_LONG).show();
                         }
                     }
