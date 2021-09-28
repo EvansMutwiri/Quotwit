@@ -124,7 +124,4 @@ public class SavedContentListActivity extends AppCompatActivity {
         recyclerView.setVisibility(View.VISIBLE);
     }
 
-//    private void hideProgressBar() {
-//        recyclerView.setVisibility(View.GONE);
-//    }
 }
